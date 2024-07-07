@@ -157,7 +157,7 @@ class GeneticOptimizer:
         for i in range(len(genome)):
             try:
                 for _ in range(genome[i]):
-                    x_i, y_i = i % self.n_groups, i // self.n_groups
+                    y_i, x_i = i % self.n_groups, i // self.n_groups
                     points.append({'lat': (self.x_intervals[x_i] + self.x_intervals[x_i + 1]) / 2,
                                    'lon': (self.y_intervals[y_i] + self.y_intervals[y_i + 1]) / 2, 'azimuth': 0})
 
@@ -170,7 +170,7 @@ class GeneticOptimizer:
         polygons = []
         for i in range(len(genome)):
             if genome[i] > 0:
-                x_i, y_i = i % self.n_groups, i // self.n_groups
+                y_i, x_i = i % self.n_groups, i // self.n_groups
 
                 polygons.append(
                     Polygon(
