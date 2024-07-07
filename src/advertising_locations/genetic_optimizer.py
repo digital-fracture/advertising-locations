@@ -15,15 +15,15 @@ def split_on_intervals(min_val, max_val, n) -> list[float]:
 
 
 class GeneticOptimizer:
-    def __init__(self, model_filename='base_model.pickle', map_config=(55.55, 55.95, 37.3, 37.9)):
+    def __init__(self, model_filename='base_model.pickle', map_config=(55.95, 55.55, 37.3, 37.9)):
         with open(Path(resources_path, model_filename), "rb") as model_file:
             self.model = pickle.load(model_file)
 
         self.map_config = map_config
 
     def find_optimum(self, num_polygons: int, num_banners: int, TA: dict[str, ...] = None, iters=50,
-                     num_entities=30, top_to_change=10, bottom_to_change=30, cross_iterations=20,
-                     mutation_iterations_1=30, mutation_iterations_2=30) -> list[tuple[float, list[int]]]:
+                     num_entities=30, top_to_change=10, bottom_to_change=20, cross_iterations=30,
+                     mutation_iterations_1=30, mutation_iterations_2=20) -> list[tuple[float, list[int]]]:
                             # sorted list of strategies: float - value (target), list[int] - banner distribution
 
         self.num_banners = num_banners
@@ -167,6 +167,8 @@ class GeneticOptimizer:
         return points
 
     def get_polygons(self, genome: list[int]) -> list[Polygon]:
+        print(genome)
+
         polygons = []
         for i in range(len(genome)):
             if genome[i] > 0:
